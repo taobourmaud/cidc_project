@@ -20,13 +20,13 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build and Push Frontend Docker Image
-      run: docker build -t taobrmd/frontend:latest ../../cicd-project-main/front-end-react/
+      run: docker build -t taobrmd/frontend:latest $GITHUB_WORKSPACE/cicd-project-main/front-end-react/
       run: docker push taobrmd/frontend:latest
 
     - name: Build and Push Order Service Docker Image
-      run: docker build -t taobrmd/order-service:latest ../../cicd-project-main/order-service/
+      run: docker build -t taobrmd/order-service:latest $GITHUB_WORKSPACE/cicd-project-main/order-service/
       run: docker push taobrmd/order-service:latest
 
     - name: Build and Push User Service Docker Image
-      run: docker build -t taobrmd/user-service:latest ../../cicd-project-main/user-service/
+      run: docker build -t taobrmd/user-service:latest $GITHUB_WORKSPACE/cicd-project-main/user-service/
       run: docker push taobrmd/user-service:latest
