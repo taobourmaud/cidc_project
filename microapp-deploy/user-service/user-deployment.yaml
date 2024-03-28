@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: user-deployement
+  name: user-deployment
   labels:
     app: user-service
 spec:
@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: user-service
-        image: taobrmd/user-service:2.0.0
+        image: taobrmd/user-service:latest
         ports:
         - containerPort: 3001
