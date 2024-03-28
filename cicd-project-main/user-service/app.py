@@ -5,7 +5,7 @@ from pymongo import MongoClient
 app = Flask(__name__)
 CORS(app)
 
-# Connect to MongoDB
+# Connect to MongoDb
 client = MongoClient('mongodb://db:27017/')
 db = client['userdb']
 collection = db['user']
