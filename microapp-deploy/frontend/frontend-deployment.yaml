@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend-deployement
+  name: frontend-deployment
   labels:
     app: frontend-react
 spec:
@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: frontend-react
-        image: taobrmd/frontend:2.0.0
+        image: taobrmd/frontend:latest
         ports:
         - containerPort: 3000
