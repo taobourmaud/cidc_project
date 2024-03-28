@@ -1,39 +1,35 @@
-name: Docker image build and push
+name: Build Docker Images
 
 on:
   push:
     branches:
-      - "main"
+      - main
 
 jobs:
-  push_images:
+  build:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - context: front-end-react
-            image: taobrmd/front-end-react
-          - context: order-service
-            image: taobrmd/order-service
-          - context: user-service
-            image: taobrmd/user-service
-
+    
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-      - name: Build and push to Docker Hub
-        uses: docker/build-push-action@v5
-        with:
-          context: ../../cicd-project-main/${{ matrix.context }}
-          push: true
-          tags: ${{ matrix.image }}:${{ github.sha }}
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+      
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build and Push Frontend Docker Image
+      run: |
+        docker build -t taobrmd/frontend:latest $GITHUB_WORKSPACE/cicd-project-main/front-end-react/
+        docker push taobrmd/frontend:latest
+
+    - name: Build and Push Order Service Docker Image
+      run: |
+        docker build -t taobrmd/order-service:latest $GITHUB_WORKSPACE/cicd-project-main/order-service/
+        docker push taobrmd/order-service:latest
+
+    - name: Build and Push User Service Docker Image
+      run: |
+        docker build -t taobrmd/user-service:latest $GITHUB_WORKSPACE/cicd-project-main/user-service/
+        docker push taobrmd/user-service:latest
