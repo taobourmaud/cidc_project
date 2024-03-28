@@ -34,6 +34,6 @@ jobs:
       - name: Build and push to Docker Hub
         uses: docker/build-push-action@v5
         with:
-          context: ./${{ matrix.context }}
+          context: ../../cicd-project-main/${{ matrix.context }}
           push: true
           tags: ${{ matrix.image }}:${{ github.sha }}
