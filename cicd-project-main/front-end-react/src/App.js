@@ -8,7 +8,7 @@ const App = () => {
 
   const fetchUserData = async () => {
     try {
-      const response = await fetch('http://user-service:3001/user');
+      const response = await fetch('http://api.app-deploy.com/user-service/user');
       const data = await response.json();
       setUserData(data);
     } catch (error) {
@@ -18,7 +18,7 @@ const App = () => {
 
   const fetchOrderData = async () => {
     try {
-      const response = await fetch('http://order-service:3002/order');
+      const response = await fetch('http://api.app-deploy.com/order-service/order');
       const data = await response.json();
       setOrderData(data.message);
     } catch (error) {
@@ -34,7 +34,7 @@ const App = () => {
     }
 
     try {
-      const response = await fetch('http://user-service:3001/user', {
+      const response = await fetch('http://api.app-deploy.com/user-service/user', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
